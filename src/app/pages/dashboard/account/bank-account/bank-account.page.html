@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Conta bancária</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color">
+
+  <div class="form">
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+
+    <ion-label class="ion-padding">
+      <h2>Descrição do serviço</h2>
+      <p>Ao ativar a opção abaixo, seus clientes também poderão realizar o pagamento via cartão de crédito.</p>
+      <p>O ClicouServiços cobra uma pequena taxa para realizar as transações.</p>
+      <p>Para mais detalhes, entre em contato com nosso suporte.</p>
+    </ion-label>
+
+    <ion-item lines="none">
+      <ion-label>Utilizar conta bancária</ion-label>
+      <ion-toggle [(ngModel)]="bankAccount.ativar_pagarme" [disabled]="loading"></ion-toggle>
+    </ion-item>
+
+    <ion-list lines="none" *ngIf="bankAccount.ativar_pagarme">
+
+      <ion-label class="ion-padding">
+        <h2>Agora nos informe os dados da sua conta de recebimento</h2>
+        <p>Ao ativar sua conta bancária, seus clientes podem realizar o pagamento através do cartão de crédito. Você
+          receberá o valor em saldo uma vez por semana.</p>
+      </ion-label>
+
+      <ion-item>
+        <ion-label>Pessoa física</ion-label>
+        <ion-toggle [(ngModel)]="fisicPerson" [disabled]="loading"></ion-toggle>
+      </ion-item>
+
+
+      <ion-item>
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Nome da pessoa/empresa" [(ngModel)]="bankAccount.legal_name">
+          </ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div class="ite_inner d-flex">
+          <ion-input *ngIf="fisicPerson" [disabled]="loading" placeholder="CPF" [(ngModel)]="cpf" mask="000.000.000-00">
+          </ion-input>
+          <ion-input *ngIf="!fisicPerson" [disabled]="loading" placeholder="CNPJ" [(ngModel)]="cnpj"
+            mask="00.000.000/0000-00"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Banco</ion-label>
+        <ion-select [disabled]="loading" [(ngModel)]="bankAccount.bank_code">
+          <ion-select-option [value]="item.Code" *ngFor="let item of banks">{{item.Code}} - {{item.Name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Agência" [(ngModel)]="bankAccount.agencia" type="tel">
+          </ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Digito da agência (Opcional)"
+            [(ngModel)]="bankAccount.agencia_dv" type="number" type="tel"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tipo de conta</ion-label>
+        <ion-select [disabled]="loading" [(ngModel)]="bankAccount.type">
+          <ion-select-option value="conta_corrente">Corrente</ion-select-option>
+          <ion-select-option value="conta_poupanca">Poupanca</ion-select-option>
+          <ion-select-option value="conta_corrente_conjunta">Corrente conjunta</ion-select-option>
+          <ion-select-option value="conta_poupanca_conjunta">Poupanca conjunta</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Número da conta" [(ngModel)]="bankAccount.conta"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Conta digito" [(ngModel)]="bankAccount.conta_dv"></ion-input>
+        </div>
+      </ion-item>
+
+    </ion-list>
+  </div>
+  <br>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button [disabled]="loading" size="large" shape="full" class="btn" (click)="save()">Salvar</ion-button>
+</ion-footer>

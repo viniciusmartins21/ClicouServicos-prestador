@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Faxina {{type}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+
+    <ion-item>
+      <ion-label>Dia da semana</ion-label>
+
+      <ion-select [(ngModel)]="attendance.weekday" interface="popover" multiple="false">
+        <ion-select-option value="Monday">Segunda</ion-select-option>
+        <ion-select-option value="Tuesday">Terça</ion-select-option>
+        <ion-select-option value="Wednesday">Quarta</ion-select-option>
+        <ion-select-option value="Thursday">Quinta</ion-select-option>
+        <ion-select-option value="Friday">Sexta</ion-select-option>
+        <ion-select-option value="Saturday">Sabado</ion-select-option>
+        <ion-select-option value="Sunday">Domingo</ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hora inicial</ion-label>
+      <ion-datetime [(ngModel)]="attendance.s_time" displayFormat="HH:mm" pickerFormat="HH:mm" cancelText="Cancelar" doneText="Ok"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Hora final</ion-label>
+      <ion-datetime [(ngModel)]="attendance.e_time" displayFormat="HH:mm" pickerFormat="HH:mm" cancelText="Cancelar" doneText="Ok"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Valor</ion-label>
+      <ion-input type="number" [(ngModel)]="attendance.price" class="ion-text-right"
+        style=" color: black; margin-right: 5px"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button size="large" shape="full" class="btn" color="success" (click)="validate()">Salvar</ion-button>
+</ion-footer>

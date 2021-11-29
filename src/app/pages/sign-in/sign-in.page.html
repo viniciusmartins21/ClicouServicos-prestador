@@ -1,0 +1,52 @@
+<ion-content class="bg_color">
+    <div class="banner">
+        <div class="logo_box">
+            <img src="assets/images/logo.png">
+        </div>
+
+        <div class="banner_images">
+            <img src="assets/images/hero_image.png">
+        </div>
+
+        <div class="form">
+            <ion-list lines="none">
+                <ion-item lines="none">
+                    <div class="ite_inner d-flex">
+                        <ion-icon name="phone-portrait-outline" class="ion-text-start"></ion-icon>
+                        <ion-input [disabled]="loading" placeholder="Celular" [(ngModel)]="phoneNumber"
+                            (keyup.enter)="alertPhone()" type="tel"></ion-input>
+                    </div>
+                </ion-item>
+                <ion-button [disabled]="loading" size="large" shape="block" class="btn" (click)="alertPhone()">Continuar
+                </ion-button>
+            </ion-list>
+        </div>
+    </div>
+
+    <!-- 
+        <div class="quick_signin">
+        <h4 class="ion-text-center">Ou então</h4>
+        <ion-row>
+            <ion-col size="6">
+                <ion-button [disabled]="loading" size="large" shape="block" class="btn facebook" (click)="signInFacebook()">
+                    <img slot="start" src="assets/images/fb.png">
+                   Facebook
+                </ion-button>
+            </ion-col>
+            
+            <ion-col size="6">
+                <ion-button [disabled]="loading" size="large" shape="block" class="btn gmail" (click)="signInGoogle()">
+                    <img slot="start" src="assets/images/google.png">
+                   Google
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+-->
+    <br>
+    <ion-label class="ion-text-center">
+        <p>Ao entrar você concorda com os</p>
+        <p (click)="privacy()"><a>Termos e condições de uso</a></p>
+    </ion-label>
+    <br>
+</ion-content>

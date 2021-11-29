@@ -1,0 +1,31 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+		</ion-buttons>
+		<ion-title>Especialização</ion-title>
+	</ion-toolbar>
+	<div class="search_box d-flex">
+		<ion-icon class="zmdi zmdi-search ion-text-start"></ion-icon>
+		<ion-searchbar class="ion-no-padding" searchIcon="hide" placeholder="Procurar" [(ngModel)]="term" (ionChange)="search($event)" [disabled]="loading"></ion-searchbar>
+	</div>
+</ion-header>
+
+<ion-content>
+	<ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+	
+	<ion-list lines="none" *ngIf="!loading">
+		<h2>Selecione suas especializações</h2>
+		
+		<div class="item_inner d-flex" *ngFor="let item of subcategories">
+			<ion-item>
+				<ion-checkbox (ionChange)="change(item.id, item.selected)" [checked]="item.selected"></ion-checkbox>
+				<h3>{{item.title}}</h3>
+			</ion-item>
+		</div>
+		
+	</ion-list>
+</ion-content>
+<ion-footer class="ion-no-border">
+	<ion-button [disabled]="loading" size="large" shape="full" class="btn" (click)="save();">Salvar</ion-button>
+</ion-footer>

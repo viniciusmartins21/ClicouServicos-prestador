@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>A caminho</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color" fullscreen="true">
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+    
+    <div #map id="map" class="map"></div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-list lines="none">
+        
+        <ion-item>
+            <div class="doctors">
+                <div class="item_inner d-flex">
+                    <div class="img_box center_img">
+                        <img *ngIf="image_url" [src]="image_url" class="crop_img" style="object-fit: cover;">
+                        <img *ngIf="!image_url" src="assets/images/empty_dp.png" class="crop_img">
+                    </div>
+                    <div class="text_box">
+                        <h2>{{name}}</h2>
+                        <h3>{{category}}</h3>
+                    </div>
+                </div>
+            </div>
+        </ion-item>
+        
+    </ion-list>
+</ion-footer>

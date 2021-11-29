@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "306391894224",
+    "firebase_url": "https://mymed-cdc2e.firebaseio.com",
+    "project_id": "mymed-cdc2e",
+    "storage_bucket": "mymed-cdc2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306391894224:android:99a64e96e2ee874b25b6d5",
+        "android_client_info": {
+          "package_name": "br.app.mymed.medico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306391894224-2glih3aabkkek7j14nr8ug9qgj6jljfi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.app.mymed.medico",
+            "certificate_hash": "574f19e29258dff4c43b6a0134bf93a130b42ea5"
+          }
+        },
+        {
+          "client_id": "306391894224-hd05lqc3kghq1si6ko8mr5qp6177i2s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQNrqcyNz3Zju5e_3TTQCEs9NiPoGcCOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306391894224-hd05lqc3kghq1si6ko8mr5qp6177i2s2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306391894224-ckd9139kmt3u289er7vq17usnka9hu4n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.app.mymed.medico"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306391894224:android:15ec327aa98ac55e25b6d5",
+        "android_client_info": {
+          "package_name": "br.app.mymed.paciente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306391894224-ha8i56l1onreic3rp3melle2jpprqckv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.app.mymed.paciente",
+            "certificate_hash": "574f19e29258dff4c43b6a0134bf93a130b42ea5"
+          }
+        },
+        {
+          "client_id": "306391894224-hd05lqc3kghq1si6ko8mr5qp6177i2s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQNrqcyNz3Zju5e_3TTQCEs9NiPoGcCOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306391894224-hd05lqc3kghq1si6ko8mr5qp6177i2s2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "306391894224-ckd9139kmt3u289er7vq17usnka9hu4n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.app.mymed.medico"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

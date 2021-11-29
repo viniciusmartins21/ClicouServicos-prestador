@@ -1,0 +1,13 @@
+.form ion-item {
+    background: var(--white);
+    top: 20px;
+    
+    &.item-input {
+        ion-label {
+            max-width: unset !important;
+            width: fit-content !important;
+            min-width: fit-content;
+        }
+    }
+}
+

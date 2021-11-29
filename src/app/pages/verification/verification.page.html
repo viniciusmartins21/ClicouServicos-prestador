@@ -1,0 +1,35 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Confirmação de número de celular</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div class="form">
+		<p class="ion-text-center">Enviamos um SMS para <br>seu número de celular</p>
+
+		<ion-list lines="none">
+			<ion-item lines="none">
+				<ion-input class="ion-text-center" type="tel" placeholder="Código de verificação" [(ngModel)]="otp">
+				</ion-input>
+			</ion-item>
+
+			<ion-button [disabled]="loading" size="large" shape="block" class="btn" (click)="verify()">
+				Validar</ion-button>
+		</ion-list>
+		<h4 class="d-flex">{{minutes}}:{{seconds}} restante <span class="end" (click)="sendOTP()">Reenviar</span></h4>
+	
+		<ion-label class="ion-text-center">
+			<br><br>
+			<p>Não recebeu o SMS?</p>
+			<ion-button [disabled]="loading" size="large" shape="block" class="btn" color="secondary" (click)="changeToEmail()">Enviar código por email</ion-button>
+		</ion-label>
+	</div>
+
+	<div class='ion-text-center' hidden>
+		<div id="recaptcha-container"></div>
+	</div>
+</ion-content>

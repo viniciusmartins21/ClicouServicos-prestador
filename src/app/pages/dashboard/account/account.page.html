@@ -1,0 +1,89 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Conta</ion-title>
+    </ion-toolbar>
+
+    <div class="banner" (click)="myProfile()">
+        <div class="doctor_details d-flex" *ngIf="!loading">
+            <div class="img_box center_img" *ngIf="profile">
+                <img *ngIf="profile.image_url" [src]="profile.image_url" class="crop_img" style="object-fit: cover;">
+                <img *ngIf="!profile.image_url" src="assets/images/empty_dp.png" class="crop_img">
+            </div>
+            <div class="img_box center_img" *ngIf="!profile">
+                <img src="assets/images/empty_dp.png" class="crop_img">
+            </div>
+            <div class="text_box">
+                <h2>{{user.name}}</h2>
+                <h3>{{user.email}}</h3>
+                <h3>{{user.mobile_number}}</h3>
+
+                <ion-chip color="success" *ngIf="!loading && profile.is_verified == 1">
+                    <ion-label class="ion-text-center" color="medium">
+                        Documentos verificados
+                    </ion-label>
+                </ion-chip>
+                <ion-chip color="warning" *ngIf="!loading && profile.is_verified != 1">
+                    <ion-label class="ion-text-center" color="medium">
+                        Verificação de documentos pendente
+                    </ion-label>
+                </ion-chip>
+            </div>
+        </div>
+    </div>
+</ion-header>
+
+<ion-content fullscreen class="bg_color">
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+
+    <ion-row>
+
+        <ion-col size="6" (click)="notifications()">
+            <div class="menu_box">
+                <h2>Notificações</h2>
+                <h3 class="d-flex">Veja suas notificações</h3>
+                <ion-icon name="notifications" class="ion-text-end end"></ion-icon>
+            </div>
+        </ion-col>
+
+        <ion-col size="6" (click)="bankAccount()">
+            <div class="menu_box">
+                <h2>Conta bancária</h2>
+                <h3 class="d-flex">Dados de recebimento</h3>
+                <ion-icon name="card" class="ion-text-end end"></ion-icon>
+            </div>
+        </ion-col>
+
+        <ion-col size="6" (click)="contactUs()">
+            <div class="menu_box">
+                <h2>Fale conosco</h2>
+                <h3 class="d-flex">Nos deixe ajudar</h3>
+                <ion-icon name="mail" class="ion-text-end end"></ion-icon>
+            </div>
+        </ion-col>
+
+        <!-- <ion-col size="6" (click)="faqs()">
+            <div class="menu_box">
+                <h2>FAQs</h2>
+                <h3 class="d-flex">Respostas rápidas</h3>
+                <ion-icon name="alert-circle" class="ion-text-end end"></ion-icon>
+            </div>
+        </ion-col> -->
+
+        <ion-col size="6" (click)="feedback()">
+            <div class="menu_box">
+                <h2>Avaliações</h2>
+                <h3 class="d-flex">Veja mais detalhes</h3>
+                <ion-icon name="create" class="ion-text-end end"></ion-icon>
+            </div>
+        </ion-col>
+
+        <ion-col size="6" (click)="logout()">
+            <div class="menu_box">
+                <h2>Sair</h2>
+                <h3 class="d-flex">Te vejo em breve!</h3>
+                <ion-icon name="log-out" class="ion-text-end end"></ion-icon>
+            </div>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

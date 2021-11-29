@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Apoio, suporte</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="form">
+        <h1>Como podemos<br>ajudar você?<br></h1>
+        <h1></h1>
+        <h2>Deixe-nos saber suas dúvidas e comentários</h2>
+        <ion-list lines="none">
+
+            <ion-item lines="none">
+                <ion-label position="fixed">Nome completo</ion-label>
+                <ion-input class="ion-text-end" type="name" [(ngModel)]="userMe.name" readonly></ion-input>
+            </ion-item>
+
+            <ion-item lines="none">
+                <div class="ite_inner d-flex">
+                    <ion-icon class="zmdi zmdi-edit ion-text-start"></ion-icon>
+                    <ion-textarea type="text" maxlength="500" rows="5" placeholder="Digite sua mensagem"
+                        [(ngModel)]="supportRequest.message"></ion-textarea>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-button [disabled]="loading" size="large" shape="block" class="btn" (click)="submitSupport()">Enviar</ion-button>
+    </div>
+
+    <div class="footer_banner">
+        <img src="assets/images/hero_image.png">
+    </div>
+</ion-content>

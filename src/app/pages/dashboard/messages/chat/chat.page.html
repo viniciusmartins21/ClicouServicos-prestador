@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar>
+        <div class="toolbar_inner d-flex">
+            <ion-buttons slot="start">
+                <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+            </ion-buttons>
+            
+            <div class="d-flex user_details" style="margin-left: 10px;">
+                <div class="img_box center_img">
+                    <img src="assets/images/empty_dp.png" class="crop_img">
+                </div>
+                <div class="text_box">
+                    <h2>{{chat.chatName}}</h2>
+                    <h3> {{chat.timeDiff}}</h3>
+                </div>
+            </div>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen #content class="bg_color">
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+    
+    <div class="chat_container d-flex" *ngIf="!loading">
+        <div class="chat_box d-flex" *ngFor="let msg of messages"
+        [ngClass]="(chat.myId === msg.senderId) ? 'send' : 'received'">
+        <div class="chat">
+            <h2>{{msg.body}}</h2>
+            <p>{{msg.timeDiff}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer_img">
+    <img src="assets/images/chat_footer_img.png">
+</div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <div class="form">
+        <ion-list lines="none d-flex">
+            <ion-item lines="none">
+                <ion-input type="text" placeholder="Escreva sua mensagem" [(ngModel)]="newMessageText">
+                </ion-input>
+            </ion-item>
+            <div class="send_btn end" (click)="send()">
+                <ion-icon name="send"></ion-icon>
+            </div>
+        </ion-list>
+    </div>
+</ion-footer>

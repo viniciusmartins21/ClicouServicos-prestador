@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Notificações</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color">
+    <div class="empty-view" *ngIf="(!notifications || !notifications.length)">
+		<div style="text-align:center">
+            <br>
+			<span style="color:#9E9E9E; font-weight:bold;">
+				Nenhuma notificação no momento
+			</span>
+		</div>
+	</div>
+
+	<ion-list *ngIf="notifications && notifications.length" lines="none">
+		<ion-item *ngFor="let item of notifications">
+			<ion-label>
+				<h2 class="d-flex"><span class="item_title {{item.colorclass}}">{{item.title}}</span> <span class="end" text-end>{{item.time}}</span></h2>
+				<p>{{item.detail}}</p>
+			</ion-label>
+		</ion-item>
+	</ion-list>
+</ion-content>

@@ -1,0 +1,137 @@
+    <ion-header>
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-button (click)="back();">
+                    <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+            <ion-title>Meu perfil</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="bg_color">
+
+        <div class="banner" (click)="selectImage(0)">
+            <div class="doctor_details d-flex">
+                <div class="img_box center_img" style="margin-left: auto; margin-right: auto;">
+                    <img *ngIf="profile.image_url" [src]="profile.image_url" class="crop_img" style="object-fit: cover;">
+                    <img *ngIf="!profile.image_url" src="assets/images/empty_dp.png" class="crop_img">
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <ion-list lines="none" style="margin-top: 8px;">
+            <!--
+                <ion-card>
+                    <div class="form">
+                        <ion-item lines="none">
+                            <div class="item_inner d-flex">
+                                <ion-icon class="zmdi zmdi-account ion-text-start"></ion-icon>
+                                <ion-input disabled placeholder="{{'full_name' | translate}}" mode="md" type="name"
+                                [(ngModel)]="user.name"></ion-input>
+                            </div>
+                        </ion-item>
+
+                        <ion-item lines="none">
+                            <div class="item_inner d-flex">
+                                <ion-icon class="zmdi zmdi-smartphone-iphone ion-text-start"> </ion-icon>
+                                <ion-input disabled placeholder="{{'phone_number' | translate}}" mode="md"
+                                [(ngModel)]="user.mobile_number"></ion-input>
+                            </div>
+                        </ion-item>
+
+                        <ion-item lines="none">
+                            <div class="item_inner d-flex">
+                                <ion-icon class="zmdi zmdi-email ion-text-start"> </ion-icon>
+                                <ion-input disabled placeholder="{{'email_address' | translate}}" mode="md"
+                                [(ngModel)]="user.email"></ion-input>
+                            </div>
+                        </ion-item>
+                    </div>
+                </ion-card>
+            -->
+
+            <ion-card class="experience_fees">
+                <h2 class="d-flex">Taxas e horários das faxinas <span class="end"
+                        (click)="addScheduling()">Editar</span></h2>
+            </ion-card>
+
+
+            <!-- #AJUSTE não ha necessidade de endereço de atendimento, visto que a prestadora de serviço ira até a residencia -->
+            <!-- <ion-card class="services">
+                <h2 class="d-flex">Endereço de atendimento <span class="end" (click)="addAddress()">Editar</span></h2>
+                <div class="text_box">
+                    <h3 class="d-flex" *ngIf="profile.address">
+                        {{profile.address}}
+                    </h3>
+                    <h3 class="d-flex" *ngIf="!profile.address">
+                        Nenhum
+                    </h3>
+                </div>
+            </ion-card> -->
+
+            <ion-card class="services">
+                <h2 class="d-flex">Categoria de atuação <span class="end" (click)="addSpecializations()">Editar</span></h2>
+                <div class="text_box">
+                    <h3 class="d-flex" *ngIf="profile.primary_category">
+                        {{profile.primary_category.title}}
+                    </h3>
+                    <h3 class="d-flex" *ngIf="!profile.primary_category">
+                        Nenhuma
+                    </h3>
+                </div>
+            </ion-card>
+
+            <!-- <ion-card class="services">
+                <h2 class="d-flex">Especializações<span class="end" (click)="addServices()">Editar</span></h2>
+                <div class="text_box">
+                    <div *ngIf="profile.subcategories.length > 0">
+                        <ion-label>
+                            <h3 class="servicesContent" *ngFor="let item of profile.subcategories; let i = index">
+                                {{i+1}} - {{item.title}}
+                            </h3>
+                        </ion-label>
+                    </div>
+                    <h3 class="d-flex" *ngIf="profile.subcategories.length == 0">
+                        Nenhuma
+                    </h3>
+                </div>
+            </ion-card> -->
+
+            <ion-card class="services" *ngIf="profile.is_verified != 1 && !sent">
+                <h2 class="d-flex">Lista de documentos</h2>
+                <ion-item>
+                    <ion-label>
+                        <h2>Documento com foto</h2>
+                        <p *ngIf="!docSelected1">Pendente</p>
+                        <p *ngIf="docSelected1">Selecionado</p>
+                    </ion-label>
+                    <ion-button (click)="selectImage(1)" *ngIf="!docSelected1">Selecionar</ion-button>
+                    <ion-button color="success" (click)="selectImage(1)" *ngIf="docSelected1">Selecionar</ion-button>
+                </ion-item>
+                <ion-item>
+                    <ion-label>
+                        <h2>Comprovante de residência</h2>
+                        <p *ngIf="!docSelected2">Pendente</p>
+                        <p *ngIf="docSelected2">Selecionado</p>
+                    </ion-label>
+                    <ion-button (click)="selectImage(2)" *ngIf="!docSelected2">Selecionar</ion-button>
+                    <ion-button color="success" (click)="selectImage(2)" *ngIf="docSelected2">Selecionar</ion-button>
+                </ion-item>
+                <!-- <ion-item>
+                    <ion-label>
+                        <h2>Certificado de Especialização</h2>
+                        <p *ngIf="!docSelected3">Pendente</p>
+                        <p *ngIf="docSelected3">Selecionado</p>
+                    </ion-label>
+                    <ion-button (click)="selectImage(3)" *ngIf="!docSelected3">Selecionar</ion-button>
+                    <ion-button color="success" (click)="selectImage(3)" *ngIf="docSelected3">Selecionar</ion-button>
+                </ion-item> -->
+
+                <ion-button [disabled]="!docSelected1 || !docSelected2 || !docSelected3" shape="block"
+                    class="btn" (click)="send()">Enviar</ion-button>
+            </ion-card>
+
+        </ion-list>
+    </ion-content>

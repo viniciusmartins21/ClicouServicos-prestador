@@ -1,0 +1,42 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+		</ion-buttons>
+		<ion-title>Conversas</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color">
+	<ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+		<ion-refresher-content refreshingSpinner="dots">
+		</ion-refresher-content>
+	</ion-refresher>
+	
+	<ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+	
+	
+	<ion-list lines="none" *ngIf="!loading">
+		<ion-label class="ion-text-center ion-padding" *ngIf="chats.length == 0">
+			<p>Nenhum chat disponível no momento</p>
+		</ion-label>
+		
+		<ion-item *ngFor="let chat of chats" (click)="openChat(chat)">
+			<div class="item_inner d-flex">
+				<!-- 
+					<div class="img_box center_img">
+						<img *ngIf="chat.chatImage && chat.chatImage.length" [src]="chat.chatImage" class="crop_img">
+						<img *ngIf="!chat.chatImage || !chat.chatImage.length" src="assets/images/empty_dp.png" class="crop_img">
+					</div>
+				-->
+				<div class="text_box">
+					<h2>{{chat.chatName}}</h2>
+					<h3>{{chat.timeDiff}}</h3>
+					<h4>{{chat.lastMessage}}</h4>
+				</div>
+			</div>
+		</ion-item>
+		
+	</ion-list>
+
+</ion-content>

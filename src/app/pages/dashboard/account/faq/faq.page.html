@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>FAQs</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color">
+    <ion-list lines="none">
+        
+        <ion-item class="active">
+            <div class="item_inner d-flex">
+                <div style="width: 100%">
+                    <div class="text_box" [innerHTML]="faq">
+                   
+                    </div>
+                </div>
+            </div>
+        </ion-item>
+
+    </ion-list>
+</ion-content>

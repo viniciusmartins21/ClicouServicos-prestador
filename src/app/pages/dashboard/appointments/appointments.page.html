@@ -1,0 +1,98 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Agendamentos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color" fullscreen>
+    <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+        <ion-refresher-content refreshingSpinner="dots">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+
+    <ion-list lines="none" *ngIf="!loading">
+
+        <h2>Próximos</h2>
+        <ion-label class="ion-text-center" *ngIf="upcoming.length == 0">
+            <p>Não há agendamentos no momento</p>
+        </ion-label>
+
+        <ion-item *ngFor="let ap of upcoming">
+            <div class="item_inner d-flex">
+                <div class="img_box center_img" (click)="details(ap)">
+                    <img *ngIf="ap.user.image_url" [src]="ap.user.image_url" class="crop_img" style="object-fit: cover;">
+                    <img *ngIf="!ap.user.image_url" src="assets/images/empty_dp.png" class="crop_img">
+                </div>
+                <div class="text_box">
+                    <h2 class="d-flex" (click)="details(ap)">
+                        {{ap.user.name}}
+                        <ion-chip disabled mode="ios" class="end" color="danger" *ngIf="ap.statusShow == 'Cancelado'">
+                            <ion-label>
+                                <h3>{{ap.statusShow}}</h3>
+                            </ion-label>
+                        </ion-chip>
+                        <ion-chip outline disabled mode="ios" class="end" *ngIf="ap.statusShow != 'Cancelado'">
+                            <ion-label>
+                                <h3>{{ap.statusShow}}</h3>
+                            </ion-label>
+                        </ion-chip>
+                    </h2>
+                    <h4 (click)="details(ap)"> {{ap.category.title}}</h4>
+                    <h4 (click)="details(ap)">Atendimento {{ap.type}}</h4>
+                    <h4 class="d-flex" (click)="details(ap)">
+                        {{ap.date}} ás {{ap.time_from}}
+                    </h4>
+                    <h4 class="d-flex" (click)="details(ap)">
+                        Valor: {{ap.price | currency:'BRL'}}
+                    </h4>
+                </div>
+            </div>
+        </ion-item>
+
+        <!------------------------------------------------------------------------------------------------------------------------------------>
+
+        <h2>Passados</h2>
+        <ion-label class="ion-text-center" *ngIf="complete.length == 0">
+            <p>Nenhum agendamento no momento</p>
+        </ion-label>
+        <ion-item *ngFor="let ap of complete">
+            <div class="item_inner d-flex">
+                <div class="img_box center_img" (click)="details(ap)">
+                    <img *ngIf="ap.user.image_url" [src]="ap.user.image_url" class="crop_img" style="object-fit: cover;">
+                    <img *ngIf="!ap.user.image_url" src="assets/images/empty_dp.png" class="crop_img">
+                </div>
+                <div class="text_box">
+                    <h2 class="d-flex" (click)="details(ap)">
+                        {{ap.user.name}}
+                        <ion-chip disabled mode="ios" class="end" color="danger" *ngIf="ap.statusShow == 'Cancelado' || ap.statusShow == 'Recusado'">
+                            <ion-label>
+                                <h3>{{ap.statusShow}}</h3>
+                            </ion-label>
+                        </ion-chip>
+                        <ion-chip disabled mode="ios" class="end" color="success" *ngIf="ap.statusShow == 'Concluído'">
+                            <ion-label>
+                                <h3>{{ap.statusShow}}</h3>
+                            </ion-label>
+                        </ion-chip>
+                    </h2>
+                    <h4 (click)="details(ap)"> {{ap.category.title}}</h4>
+                    <h4 (click)="details(ap)">Atendimento {{ap.type}}</h4>
+                    <h4 class="d-flex" (click)="details(ap)">
+                        {{ap.date}} ás {{ap.time_from}}
+                    </h4>
+                    <h4 class="d-flex" (click)="details(ap)">
+                        Valor: {{ap.price | currency:'BRL'}}
+                    </h4>
+                </div>
+            </div>
+        </ion-item>
+
+    </ion-list>
+
+    <ion-infinite-scroll #IonInfiniteScroll (ionInfinite)="doInfinite()">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

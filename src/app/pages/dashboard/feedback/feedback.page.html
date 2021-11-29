@@ -1,0 +1,149 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>{{'reviews' | translate}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color">
+    <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+        <ion-refresher-content pullingIcon="null" refreshingSpinner="dots">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+
+    <div class="banner">
+        <div class="doctor_details d-flex">
+            <div class="img_box center_img">
+                <img *ngIf="!user || !user.image_url" src="assets/images/empty_dp.png" class="crop_img">
+                <img *ngIf="user && user.image_url" data-src="{{user.image_url}}">
+            </div>
+            <div class="text_box">
+                <h2>{{user.name}}</h2>
+                <h3>Avaliação Média</h3>
+                <h4 class="d-felx">4.5
+                    <ion-icon class="zmdi zmdi-star ion-text-end"></ion-icon>
+                </h4>
+            </div>
+        </div>
+
+        <!--
+            <div class="graph_container">
+            <h2>{{'ratings_overview' | translate}}</h2>
+            <div class="graph_box d-flex">
+                <h3 class="d-flex"><span class="ion-text-end">5</span>
+                    <ion-icon class="zmdi zmdi-star ion-text-end end"></ion-icon>
+                </h3>
+                <div class="bar">
+                    <div class="bar_active" style="width: 70%"></div>
+                </div>
+                <h4>34</h4>
+            </div>
+            <div class="graph_box d-flex">
+                <h3 class="d-flex"><span class="ion-text-end">4</span>
+                    <ion-icon class="zmdi zmdi-star ion-text-end end"></ion-icon>
+                </h3>
+                <div class="bar">
+                    <div class="bar_active" style="width: 60%"></div>
+                </div>
+                <h4>21</h4>
+            </div>
+            <div class="graph_box d-flex">
+                <h3 class="d-flex"><span class="ion-text-end">3</span>
+                    <ion-icon class="zmdi zmdi-star ion-text-end end"></ion-icon>
+                </h3>
+                <div class="bar">
+                    <div class="bar_active" style="width: 50%"></div>
+                </div>
+                <h4>15</h4>
+            </div>
+            <div class="graph_box d-flex">
+                <h3 class="d-flex"><span class="ion-text-end">2</span>
+                    <ion-icon class="zmdi zmdi-star ion-text-end end"></ion-icon>
+                </h3>
+                <div class="bar">
+                    <div class="bar_active" style="width: 30%"></div>
+                </div>
+                <h4>6</h4>
+            </div>
+            <div class="graph_box d-flex">
+                <h3 class="d-flex"><span class="ion-text-end">1</span>
+                    <ion-icon class="zmdi zmdi-star ion-text-end end"></ion-icon>
+                </h3>
+                <div class="bar">
+                    <div class="bar_active" style="width: 10%"></div>
+                </div>
+                <h4>2</h4>
+            </div>
+        </div>
+
+        <div class="people_rate">
+            <ion-row>
+                <ion-col size="6">
+                    <h2>{{'total_people_rated' | translate}}</h2>
+                    <h3 class="d-flex">
+                        <ion-icon class="zmdi zmdi-assignment-account"></ion-icon>
+                        78
+                    </h3>
+                </ion-col>
+
+                <ion-col size="6">
+                    <h2>{{'appointment_booked' | translate}}</h2>
+                    <h3 class="d-flex">
+                        <ion-icon class="zmdi zmdi-assignment-check"></ion-icon>
+                        129
+                    </h3>
+                </ion-col>
+            </ion-row>
+        </div>
+-->
+    </div>
+
+
+    <ion-list lines="none" *ngIf="!loading">
+
+        <h1>{{'recent_reviews' | translate}}</h1>
+
+        <ion-label class="ion-text-center" *ngIf="reviews.length == 0">
+            <p>Nenhuma avaliação no momento</p>
+        </ion-label>
+        <ion-item *ngFor="let review of reviews">
+            <div class="item_inner">
+                <div class="reviewer_details d-flex">
+                    <div class="img_box center_img">
+                        <img *ngIf="review.user && review.user.image_url" data-src="{{review.user.image_url}}">
+                        <img *ngIf="!review.user || !review.user.image_url" src="assets/images/7.png">
+                    </div>
+                    <div class="text_box">
+                        <h2 class="d-flex">
+                            <span class="reviewer_name">{{review.user.name}}</span>
+                            <span class="end">
+                                {{review.rating}}
+                                &nbsp;
+                                <ion-icon class="zmdi zmdi-star active"></ion-icon>
+                                <ion-icon class="zmdi zmdi-star active"></ion-icon>
+                                <ion-icon class="zmdi zmdi-star active"></ion-icon>
+                                <ion-icon class="zmdi zmdi-star active"></ion-icon>
+                                <ion-icon class="zmdi zmdi-star active"></ion-icon>
+                            </span>
+                        </h2>
+
+                        <h3 class="d-flex">
+                            {{'visited_for' | translate}}&nbsp;<strong>???</strong>
+                            <span class="end">{{review.created_at}}</span>
+                        </h3>
+                    </div>
+                </div>
+                <p>
+                    {{review.review}}
+                </p>
+            </div>
+        </ion-item>
+
+    </ion-list>
+
+    <ion-infinite-scroll #IonInfiniteScroll (ionInfinite)="doInfinite()">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Carregando mais dados...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>Confirmação de segurança</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div class="form">
+		<p class="ion-text-center">Enviamos um código para <br>seu email</p>
+
+		<ion-list lines="none">
+			<ion-item lines="none">
+				<ion-input class="ion-text-center" type="text" placeholder="Código de verificação" [(ngModel)]="code" mask="000000">
+				</ion-input>
+			</ion-item>
+
+			<ion-button [disabled]="loading" size="large" shape="block" class="btn" (click)="verify()">Validar</ion-button>
+		</ion-list>
+    <ion-label class="ion-text-center">
+			<br><br>
+			<p>Ou então</p>
+      <br><br>
+			<ion-button [disabled]="loading" size="large" shape="clear" class="btn" color="secondary" (click)="backPage()">Voltar para o início</ion-button>
+		</ion-label>
+	</div>
+
+	<div class='ion-text-center' hidden>
+		<div id="recaptcha-container"></div>
+	</div>
+</ion-content>

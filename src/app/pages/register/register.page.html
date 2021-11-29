@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Cadastrar agora</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <div class="form">
+        <p class="ion-text-center">Seu número de telefone ainda não está cadastrado</p>
+
+        <ion-list lines="none">
+
+            <ion-item lines="none">
+                <div class="ite_inner d-flex">
+                    <ion-icon class="zmdi zmdi-smartphone-iphone ion-text-start"></ion-icon>
+                    <ion-input disabled type="text" [(ngModel)]="phoneNumberFull"></ion-input>
+                </div>
+            </ion-item>
+            <ion-item lines="none">
+                <div class="ite_inner d-flex">
+                     <ion-icon class="zmdi zmdi-account ion-text-start"></ion-icon>
+                    <ion-input [disabled]="loading" placeholder="Nome completo" type="name" [(ngModel)]="signUpRequest.name"></ion-input>
+                </div>
+            </ion-item>
+            <ion-item lines="none">
+                <div class="ite_inner d-flex">
+                      <ion-icon class="zmdi zmdi-email ion-text-start"></ion-icon>
+                    <ion-input [disabled]="loading" placeholder="Endereço de email" type="name" [(ngModel)]="signUpRequest.email"></ion-input>
+                </div>
+            </ion-item>
+            <ion-button [disabled]="loading" size="large" shape="block" class="btn" (click)="requestSignUp()">Continuar</ion-button>
+            <br>
+            <h4 class="ion-text-center" (click)="sign_in()">Voltar para tela de login</h4>
+
+            <div class="form">
+                <p class="ion-text-center">Enviaremos um SMS com um código para este número</p>
+            </div>
+        </ion-list>
+    </div>
+
+</ion-content>

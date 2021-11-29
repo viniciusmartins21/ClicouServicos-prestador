@@ -1,0 +1,142 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="chevron-back-outline" defaultHref="my-profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Taxas e horários das faxinas</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="page">
+      <ion-segment-button value="1">
+        <ion-icon name="desktop"></ion-icon>
+        Escritório
+      </ion-segment-button>
+
+      <ion-segment-button value="2">
+        <ion-icon name="home"></ion-icon>
+        Domiciliar
+      </ion-segment-button>
+
+      <ion-segment-button value="3">
+        <ion-icon name="business"></ion-icon>
+        Consultório
+      </ion-segment-button>
+
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content refreshingSpinner="dots">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+
+  <ion-list lines="none" class="ion-text-left weekdays" *ngIf="page == 1 && !loading">
+    <ion-label class="ion-text-center">
+      <h2 style="font-size: large;"> Atendimento em escritório </h2>
+    </ion-label>
+    <ion-item-sliding *ngFor="let item of escritorio">
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <span class="start-text">{{item.weekdayShow}} das</span>
+            <ion-datetime displayFormat="HH:mm" [value]="item.s_time" display-timezone="utc" readonly></ion-datetime>
+            <span>até ás</span>
+            <ion-datetime displayFormat="HH:mm" [value]="item.e_time" display-timezone="utc" readonly></ion-datetime>
+          </ion-row>
+          <ion-row>
+            <span>Valor: </span>
+            <ion-input [value]="item.price | currency:'BRL'" readonly></ion-input>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" expandable (click)="delete(item);">
+          Apagar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list lines="none" class="ion-text-left weekdays" *ngIf="page == 2 && !loading">
+    <ion-label class="ion-text-center">
+      <h2 style="font-size: large;">Atendimento domiciliar</h2>
+    </ion-label>
+
+    <ion-item-sliding *ngFor="let item of home">
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <span class="start-text">{{item.weekdayShow}} das</span>
+            <ion-datetime displayFormat="HH:mm" [value]="item.s_time" display-timezone="utc" readonly></ion-datetime>
+            <span>até ás</span>
+            <ion-datetime displayFormat="HH:mm" [value]="item.e_time" display-timezone="utc" readonly></ion-datetime>
+          </ion-row>
+          <ion-row>
+            <span>Valor: </span>
+            <ion-input [value]="item.price | currency:'BRL'" readonly></ion-input>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" expandable (click)="delete(item);">
+          Apagar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list lines="none" class="ion-text-left weekdays" *ngIf="page == 3 && !loading">
+    <ion-label class="ion-text-center">
+      <h2 style="font-size: large;">Atendimento em consultório</h2>
+    </ion-label>
+
+    <ion-item-sliding *ngFor="let item of clinic">
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <span class="start-text">{{item.weekdayShow}} das</span>
+            <ion-datetime displayFormat="HH:mm" [value]="item.s_time" display-timezone="utc" readonly></ion-datetime>
+            <span>até ás</span>
+            <ion-datetime displayFormat="HH:mm" [value]="item.e_time" display-timezone="utc" readonly></ion-datetime>
+          </ion-row>
+          <ion-row>
+            <span>Valor: </span>
+            <ion-input [value]="item.price | currency:'BRL'" readonly></ion-input>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" expandable (click)="delete(item);">
+          Apagar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <!-- me confundi um pouco nessa organização aqui #HELP -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="page == 1">
+    <ion-fab-button color="success" (click)="openModal('consultorio')">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="page == 2">
+    <ion-fab-button color="success" (click)="openModal('domiciliar')">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="page == 3">
+    <ion-fab-button color="success" (click)="openModal('escritorio')">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "MyMed Professional",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

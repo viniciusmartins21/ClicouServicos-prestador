@@ -1,0 +1,171 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <div class="title_inner d-flex">
+                <span>Detalhes</span>
+            </div>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="doctor_info d-flex">
+
+        <div class="img_box center_img">
+            <img *ngIf="data.user.image_url" [src]="data.user.image_url" class="crop_img" style="object-fit: cover;">
+            <img *ngIf="!data.user.image_url" src="assets/images/empty_dp.png" class="crop_img">
+        </div>
+
+        <div class="text_box">
+            <h2>{{data.user.name}}</h2>
+            <h3> {{data.user.mobile_number}}</h3>
+            <ion-chip outline disabled mode="ios">
+                <ion-label>{{data.statusShow}}</ion-label>
+            </ion-chip>
+        </div>
+    </div>
+
+    <div class="form">
+        <ion-list lines="none">
+            <ion-item>
+                <div class="item_inner">
+                    <h2 class="d-flex">Consulta no dia</h2>
+                    {{data.date}} ás {{data.time_from}}
+                </div>
+
+            </ion-item>
+
+            <ion-item *ngIf="data.address && data.type !== 'Online'">
+                <div class="item_inner">
+                    <h2 class="d-flex">Localização</h2>
+                    <h3> {{data.address.title}}</h3>
+                    <h4 class="d-flex">
+                        {{data.address.address}}
+                        <ion-icon name="navigate" class="end ion-text-end"></ion-icon>
+                    </h4>
+                </div>
+                <ion-button color="light" (click)="copy()">
+                    <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+                </ion-button>
+            </ion-item>
+
+            <ion-item *ngIf="!data.address && data.type !== 'Online'">
+                <div class="item_inner">
+                    <h2 class="d-flex">Localização</h2>
+                    <h4 class="d-flex">
+                        {{data.provider.address}}
+                        <ion-icon  name="navigate" class="end ion-text-end"></ion-icon>
+                    </h4>
+                </div>
+                <ion-button color="light" (click)="copy2()">
+                    <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+                </ion-button>
+            </ion-item>
+
+            <ion-item>
+                <div class="item_inner">
+                    <h2 class="d-flex">Tipo de atendimento</h2>
+                    <h3>{{data.type}}</h3>
+                </div>
+            </ion-item>
+
+            <ion-item>
+                <div class="item_inner">
+                    <h2 class="d-flex">Especialidade # selecionada</h2>
+                    <h3>{{data.category.title}}</h3>
+                </div>
+            </ion-item>
+
+            <ion-item>
+                <div class="item_inner">
+                    <h2 class="d-flex">Status do pagamento</h2>
+                    {{data.status_pg}}
+                </div>
+            </ion-item>
+
+            <ion-item>
+                <div class="item_inner">
+                    <h2 class="d-flex">Forma de pagamento</h2>
+                    {{data.method_payment}}
+                </div>
+            </ion-item>
+
+            <ion-item>
+                <div class="item_inner">
+                    <h2 class="d-flex">Valor</h2>
+                    {{data.price | currency:'BRL'}}
+                </div>
+            </ion-item>
+
+        </ion-list>
+    </div>
+</ion-content>
+<ion-footer class="ion-no-border" *ngIf="data.status !== 'rejected' && data.status !== 'cancelled'">
+    <ion-row *ngIf="data.status === 'pending'">
+        <ion-col size="6" (click)="update('rejected')">
+            <ion-button size="large" shape="full" fill="clear" class="btn">
+                Cancelar
+            </ion-button>
+        </ion-col>
+        <ion-col size="6" (click)="update('accepted')">
+            <ion-button size="large" shape="full" class="btn">
+                Aceitar
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="data.status === 'accepted' && isToday">
+        <ion-col size="6" (click)="update('onway')" *ngIf="data.address">
+            <ion-button size="large" shape="full" fill="clear" class="btn">
+                Ir para consulta
+            </ion-button>
+        </ion-col>
+        <ion-col size="6" (click)="update('ongoing')" *ngIf="!data.address">
+            <ion-button size="large" shape="full" fill="clear" class="btn">
+               Iniciar consulta
+            </ion-button>
+        </ion-col>
+        <ion-col size="6" (click)="chat()">
+            <ion-button size="large" shape="full" class="btn">
+                Enviar mensagem
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="data.status === 'accepted' && !isToday && !isOld">
+        <ion-col size="6" (click)="update('rejected')">
+            <ion-button size="large" shape="full" fill="clear" class="btn">
+                Cancelar
+            </ion-button>
+        </ion-col>
+        <ion-col size="6" (click)="chat()">
+            <ion-button size="large" shape="full" class="btn">
+                Enviar mensagem
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="data.status === 'accepted' && isOld">
+        <ion-col size="12" (click)="update('rejected')">
+            <ion-button size="large" shape="full" fill="clear" class="btn">
+                Cancelar
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="data.status === 'onway'">
+        <ion-col size="12" (click)="update('ongoing')">
+            <ion-button size="large" shape="full" class="btn">
+                Iniciar consulta
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="data.status === 'ongoing'">
+        <ion-col size="12" (click)="update('complete')">
+            <ion-button size="large" shape="full" class="btn">
+                Finalizar consulta
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-footer>

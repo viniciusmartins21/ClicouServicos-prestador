@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Endereço de atendimento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color">
+  
+  <div class="form">
+    <ion-list lines="none">                
+      <ion-item lines="none">
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Cep" (ionChange)="getAddress()" [(ngModel)]="cep" type="tel"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item lines="none">
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Rua" [(ngModel)]="street" readonly></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item lines="none">
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Número" [(ngModel)]="number" type="number"></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item lines="none">
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Bairro" [(ngModel)]="district" readonly></ion-input>
+        </div>
+      </ion-item>
+
+      <ion-item lines="none">
+        <div class="ite_inner d-flex">
+          <ion-input [disabled]="loading" placeholder="Cidade - UF" [(ngModel)]="city" readonly></ion-input>
+        </div>
+      </ion-item>
+      
+    </ion-list>
+  </div>
+  
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button [disabled]="loading" size="large" shape="full" class="btn" (click)="save()">Salvar</ion-button>
+</ion-footer>
