@@ -17,7 +17,7 @@ export class AddSchedulingPage implements OnInit {
   loading: boolean = false;
   profile: Profile;
   page: number = 1;
-  online: Array<Attendance> = [];
+  escritorio: Array<Attendance> = [];
   home: Array<Attendance> = [];
   clinic: Array<Attendance> = [];
 
@@ -42,7 +42,7 @@ export class AddSchedulingPage implements OnInit {
   async loadPage() {
     this.loading = true;
 
-    this.online = [];
+    this.escritorio = [];
     this.home = [];
     this.clinic = [];
 
@@ -51,17 +51,17 @@ export class AddSchedulingPage implements OnInit {
       this.loading = false;
 
       res.forEach(element => {
-        if (element['type'] == 'consultorio') {
+        if (element['type'] == 'escritorio') {
           element.durationShow = element.duration + ' minutos';
           element.weekdayShow = this.setWeekDay(element.weekday);
-          this.online.push(element);
+          this.escritorio.push(element);
 
         } else if (element['type'] == 'domiciliar') {
           element.durationShow = element.duration + ' minutos';
           element.weekdayShow = this.setWeekDay(element.weekday);
           this.home.push(element);
 
-        } else if (element['type'] == 'escritorio') {
+        } else if (element['type'] == 'consultorio') {
           element.durationShow = element.duration + ' minutos';
           element.weekdayShow = this.setWeekDay(element.weekday);
           this.clinic.push(element);

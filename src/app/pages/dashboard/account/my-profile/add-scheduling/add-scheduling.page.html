@@ -36,7 +36,7 @@
 
   <ion-list lines="none" class="ion-text-left weekdays" *ngIf="page == 1 && !loading">
     <ion-label class="ion-text-center">
-      <h2 style="font-size: large;"> Atendimento em escritório </h2>
+      <h2 style="font-size: large;"> Faxina escritório </h2>
     </ion-label>
     <ion-item-sliding *ngFor="let item of escritorio">
       <ion-item>
@@ -64,7 +64,7 @@
 
   <ion-list lines="none" class="ion-text-left weekdays" *ngIf="page == 2 && !loading">
     <ion-label class="ion-text-center">
-      <h2 style="font-size: large;">Atendimento domiciliar</h2>
+      <h2 style="font-size: large;">Faxina domiciliar</h2>
     </ion-label>
 
     <ion-item-sliding *ngFor="let item of home">
@@ -93,7 +93,7 @@
 
   <ion-list lines="none" class="ion-text-left weekdays" *ngIf="page == 3 && !loading">
     <ion-label class="ion-text-center">
-      <h2 style="font-size: large;">Atendimento em consultório</h2>
+      <h2 style="font-size: large;">Faxina em consultório</h2>
     </ion-label>
 
     <ion-item-sliding *ngFor="let item of clinic">
@@ -122,7 +122,7 @@
 
   <!-- me confundi um pouco nessa organização aqui #HELP -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="page == 1">
-    <ion-fab-button color="success" (click)="openModal('consultorio')">
+    <ion-fab-button color="success" (click)="openModal('escritorio')">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -134,7 +134,7 @@
   </ion-fab>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="page == 3">
-    <ion-fab-button color="success" (click)="openModal('escritorio')">
+    <ion-fab-button color="success" (click)="openModal('consultorio')">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

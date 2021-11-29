@@ -13,7 +13,7 @@ export class NewSchedulePage implements OnInit {
   loading: boolean = false;
   attendance: Attendance = new Attendance();
   attendance2: Attendance = new Attendance();
-  type: string = 'online';
+  type: string = 'em escritorio';
 
   constructor(
     private navCtrl: NavController,
@@ -28,6 +28,9 @@ export class NewSchedulePage implements OnInit {
     if (this.attendance.type === 'domiciliar') {
       this.type = 'domiciliar';
     } else if (this.attendance.type == 'escritorio') {
+      this.type = 'em escritório';
+    }
+    else if (this.attendance.type == 'consultorio') {
       this.type = 'em consultório';
     }
   }
